@@ -15,6 +15,11 @@ A bash script to autosearch for subtitles on a Synology NAS
   5. Go to the _Control Panel > Task Schedule_ and create one or two tasks for TV Shows and/or Movies, accordingly:
    * $ `/volume1/storage/script/filebotology.sh -t tv -p /volume1/video/tvshows/ >> /var/log/filebotology.log`
    * $ `/volume1/storage/script/filebotology.sh -t movies -p /volume1/video/movies/ >> /var/log/filebotology.log`
-  6. Install the logrotate config for rotating the log file for the script:
+   * Choose how often they run; make sure to not run them at the same minute, so their execution won't overlap;
+  6. Install the logrotate config for rotating the script log (_change the logrotate options as you wish_):
    * `$ cd /etc/logrotate.d`
    * `$ ln -s /volume1/git/filebotology/fbt-logrotate filebotology`
+   * to check the status do a `$ cat /var/lib/logrotate.status | grep filebot`, it will return something like this: `"/var/log/filebot.log" 2015-3-21-12:0:0`
+
+## Language
+At the moment the script is set to download Italian subtitles in srt format from OpenSubitles.org and TheMovieDB, using hash-based matching. Until I add a command line switch to select desired language(s), you will have to edit the script by hand. Look for the instruction `LANG=it` at line 23 and change it to your country's two letters code.
