@@ -13,8 +13,8 @@ An ash script (yes, Synolgy boxes run ash shell not bash) to autosearch for subt
    * `$ cd /volume1/git/`
    * `$ git clone https://github.com/bateman/filebotology.git`
   5. Go to the _Control Panel > Task Schedule_ and create one or two tasks for TV Shows and/or Movies, accordingly:
-   * `$ /volume1/storage/script/filebotology.sh -t tv -p /volume1/video/tvshows/ >> /var/log/filebotology.log`
-   * `$ /volume1/storage/script/filebotology.sh -t movies -p /volume1/video/movies/ >> /var/log/filebotology.log`
+   * `$ /volume1/git/filebotology.sh -t tv -p /volume1/video/tvshows/ >> /var/log/filebotology.log`
+   * `$ /volume1/git/filebotology.sh -t movies -p /volume1/video/movies/ >> /var/log/filebotology.log`
    * Choose how often they run; make sure to not run them at the same minute, so their execution won't overlap;
   6. Install the logrotate config for rotating the script log (_change the logrotate options as you wish_):
    * `$ cd /etc/logrotate.d`
