@@ -15,4 +15,6 @@ A bash script to autosearch for subtitles on a Synology NAS
   5. Go to the _Control Panel > Task Schedule_ and create one or two tasks for TV Shows and/or Movies, accordingly:
    * $ `/volume1/storage/script/filebotology.sh -t tv -p /volume1/video/tvshows/ >> /var/log/filebotology.log`
    * $ `/volume1/storage/script/filebotology.sh -t movies -p /volume1/video/movies/ >> /var/log/filebotology.log`
-  6. Install the logrotate config for rotating the log file
+  6. Install the logrotate config for rotating the log file:
+   * `$ cd /etc/logrotate.d`
+   * `$ ln -s /volume1/git/filebotology/fbt-logrotate`
