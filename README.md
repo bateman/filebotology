@@ -1,5 +1,5 @@
 # filebotology
-A bash script to autosearch for subtitles on a Synology NAS. This script relies on [Filebot cli] (http://www.filebot.net/cli.html) capabilities to automate the search of subtitles for your videos stored in your beloved Synology NAS.
+An ash script (yes, Synolgy boxes run ash shell not bash) to autosearch for subtitles on a Synology NAS. This script relies on [Filebot cli] (http://www.filebot.net/cli.html) capabilities to automate the search of subtitles for your videos stored in your beloved Synology NAS.
 
 ## Requirements
   * Filebot
