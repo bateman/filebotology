@@ -6,7 +6,7 @@ An ash script (yes, Synolgy boxes run ash shell not bash) to autosearch for subt
   * Java ARM
 
 ## Installation
-  1. Instal Java for ARM architecture from here. Note that we will require Java 8; as of this writing, ver. 8 is not supported directly from Synology _Package center_ (it's stuck at ver. 7). Therefore, download and install manually from [Oracle official page] (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-arm-downloads-2187472.html).
+  1. Instal Java for ARM architecture. Note that we will require Java 8; as of this writing, ver. 8 is not supported directly from Synology _Package center_ (it's stuck at ver. 7). Therefore, download and install manually from [Oracle official page] (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-arm-downloads-2187472.html).
   2. Go to the _Package Center_, and install _Filebot_ from community package list.
   3. Also from the community packages, select and install _Git_ to ease the download of the script itself.
   4. Open an SSH session and checkout the script in your NAS:
@@ -19,7 +19,7 @@ An ash script (yes, Synolgy boxes run ash shell not bash) to autosearch for subt
   6. Install the logrotate config for rotating the script log (_change the logrotate options as you wish_):
    * `$ cd /etc/logrotate.d`
    * `$ ln -s /volume1/git/filebotology/fbt-logrotate filebotology`
-   * to check the status do a `$ cat /var/lib/logrotate.status | grep filebot`, it will return something like this: `"/var/log/filebot.log" 2015-3-21-12:0:0`
+   * to check the status do a `$ cat /var/lib/logrotate.status | grep filebot`, it will return something like this: `"/var/log/filebotology.log" 2015-3-21-12:0:0`
 
 ## Language
 At the moment the script is set to download Italian subtitles in srt format from OpenSubitles.org and TheMovieDB, using hash-based matching. Until I add a command line switch to select desired language(s), you will have to edit the script by hand. Look for the instruction `LANG=it` at line 23 and change it to your country's two letters code.
