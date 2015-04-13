@@ -3,10 +3,10 @@ An ash script (yes, Synolgy boxes run ash shell not bash) to autosearch for subt
 
 ## Requirements
   * Filebot
-  * Java ARM
+  * Java SE Embedded 8 
 
 ## Installation
-  1. Instal Java for ARM architecture. Note that we will require Java 8; as of this writing, ver. 8 is not supported directly from Synology _Package center_ (it's stuck at ver. 7). Therefore, download and install manually from [Oracle official page] (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-arm-downloads-2187472.html).
+  1. Instal Java 8 SE Embedded for ARM architecture. Note that, as of this writing, ver. 8 is not supported directly from Synology _Package center_ (it's stuck at ver. 7). Therefore, you need to add the following custom package repository [http://packages.pcloadletter.co.uk] (http://packages.pcloadletter.co.uk) to the package center. After that, Java 8 should show up with other extra packages in the Community list.
   2. Go to the _Package Center_, and install _Filebot_ from community package list.
   3. Also from the community packages, select and install _Git_ to ease the download of the script itself.
   4. Open an SSH session and checkout the script in your NAS:
