@@ -6,8 +6,8 @@ An ash script (yes, Synolgy boxes run ash shell not bash) to autosearch for subt
   * Java SE Embedded 8 
 
 ## Installation
-  1. Instal Java 8 SE Embedded for ARM architecture. Note that, as of this writing, ver. 8 is not supported directly from Synology _Package center_ (it's stuck at ver. 7). Therefore, you need to add the following custom package repository [http://packages.pcloadletter.co.uk] (http://packages.pcloadletter.co.uk) to the package center. After that, Java 8 should show up with other extra packages in the Community list. (*Make sure to pick the one that's right for your CPU model!* See [here] (http://forum.synology.com/wiki/index.php/What_kind_of_CPU_does_my_NAS_have) if you don't know)
-  2. Go to the _Package Center_, and install _Filebot_ from community package list.
+  1. Instal Java 8 SE Embedded for ARM architecture. Note that, as of this writing, ver. 8 is not supported as an official package from Synology through the _Package center_ -- the Java Manager is infact stuck at ver. 7. Therefore, you need to add a custom Package Source: go to _Package Center ► Settings ► Package Sources ► Add ► Name: PcLoadLetter and Location: [http://packages.pcloadletter.co.uk] (http://packages.pcloadletter.co.uk) ► OK. After that, Java 8 should show up with other extra packages in the Community list. (*Make sure to pick the one that's right for your CPU model!* See [here] (http://forum.synology.com/wiki/index.php/What_kind_of_CPU_does_my_NAS_have) if you don't know already.)
+  2. Add Package Source also for _Filebot_; go to Package Center ► Settings ► Package Sources ► Add ► Name: FileBot and Location: [https://packages.filebot.net/syno/] (https://packages.filebot.net/syno/) ► OK. Now find and install it from Community packages list.
   3. Also from the community packages, select and install _Git_ to ease the download of the script itself.
   4. Open an SSH session and checkout the script in your NAS:
    * `$ cd /volume1/git/`
