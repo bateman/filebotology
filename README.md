@@ -31,9 +31,11 @@ At the moment the script is set to download Italian subtitles in srt format from
 ## CLI execution
 To run it from the command line,  excute the script with the -h flag to print the following help menu.
 ```
--t tv|movie      sets the type of media to scan. Allowed values are 'tv' or 'movie'.
--p path          sets the path where to look for media. No default value is set.
--h               displays this help message. No further functions are performed.
+-t tv|movie      Sets the type of media to scan. Allowed values are 'tv' or 'movie'.
+-p path          Sets the path where to look for media. No default value is set.
+-h               Displays this help message. No further functions are performed.
 ```
 
 Example: `$ filebotology.sh -t tv -p /volume1/video/tvshows`
+
+Now, sit back and relax, it's gonna take a long while if you have a large base of videos!
