@@ -10,14 +10,17 @@ An ash script (yes, Synolgy boxes run ash shell not bash) to autosearch for subt
   2. Instal Java 8 SE Embedded for ARM architecture. Note that, as of this writing, ver. 8 is not supported as an official package from Synology through the _Package center_ -- the Java Manager is infact stuck at ver. 7. Therefore, you need to add a custom Package Source: go to Package Center ► Settings ► Package Sources ► Add ► Name: SynologyItalia and Location:  http://spk.synologyitalia.com/] ( http://spk.synologyitalia.com/) ► OK. After that, Java 8 should show up with other extra packages in the Community list. (*Make sure to pick the one that's right for your CPU model!* See [here] (http://forum.synology.com/wiki/index.php/What_kind_of_CPU_does_my_NAS_have) if you don't know already.)
   2. Add Package Source also for _Filebot_; go to Package Center ► Settings ► Package Sources ► Add ► Name: FileBot and Location: [https://packages.filebot.net/syno/] (https://packages.filebot.net/syno/) ► OK. Now find and install it from Community packages list.
   3. Also from the community packages, select and install _Git_ to ease the download of the script itself.
-  4. Open an SSH session and checkout the script in your NAS:
+  4. Got to [www.opensubtitles.org] () and sign up; now open an SSH session, and run the following from command line:
+   * `filebot -script fn:configure` and enter your credentials
+   * if you forget, you'll get this error message in the log/console as a reminder: `CmdlineException: OpenSubtitles: Please enter your login details by calling "filebot -script fn:configure"`
+  5. Still via SSH, checkout the script in your NAS:
    * `$ cd /volume1/git/`
    * `$ git clone https://github.com/bateman/filebotology.git`
-  5. Go to the Control Panel ► Task Scheduler (i.e., the DSM cron equivalent) and create one or two tasks for TV Shows and/or Movies, accordingly:
+  6. Go to the Control Panel ► Task Scheduler (i.e., the DSM cron equivalent) and create one or two tasks for TV Shows and/or Movies, accordingly:
    * `$ /volume1/git/filebotology/filebotology.sh -t tv -p /volume1/video/tvshows/ >> /var/log/filebotology.log`
    * `$ /volume1/git/filebotology/filebotology.sh -t movies -p /volume1/video/movies/ >> /var/log/filebotology.log`
    * Choose how often they run; make sure to not run them at the same minute, so their execution won't overlap; use admin as task owner.
-  6. Install the logrotate config for rotating the script log (_change the logrotate options as you wish_):
+  7. Install the logrotate config for rotating the script log (_change the logrotate options as you wish_):
    * `$ cd /etc/logrotate.d`
    * `$ ln -s /volume1/git/filebotology/fbt-logrotate filebotology`
    * to check the status do a `$ cat /var/lib/logrotate.status | grep filebot`, it will return something like this: `"/var/log/filebotology.log" 2015-3-21-12:0:0`
