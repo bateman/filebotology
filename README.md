@@ -29,7 +29,7 @@ An ash script (yes, Synolgy boxes run ash shell not bash) to autosearch for subt
 At the moment the script is set to download Italian subtitles in srt format from OpenSubitles.org and TheMovieDB, using hash-based matching. Until I add a command line switch to select desired language(s), you will have to edit the script by hand. Look for the instruction `LANG=it` at line 23 and change it to your country's two letters code.
 
 ## CLI execution
-To run it from the command line,  excute the script with the -h flag to print the following help menu.
+To run it from the command line,  excute the script with the `-h` flag to print the following help menu.
 ```
 -t tv|movie      Sets the type of media to scan. Allowed values are 'tv' or 'movie'.
 -p path          Sets the path where to look for media. No default value is set.
