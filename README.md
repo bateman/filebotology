@@ -31,7 +31,7 @@ At the moment the script is set to download Italian subtitles in srt format from
 ## CLI execution
 To run it from the command line,  excute the script with the `-h` flag to print the following help menu.
 ```
--t tv|movie  Sets the type of media to scan. Allowed values are 'tv' or 'movie'.
+-t type      Sets the type of media to scan. Allowed values are 'tv' or 'movie'.
 -p path      Sets the path where to look for media. No default value is set.
 -l language  Sets the two-letter code for subs language (ISO 639-1, see http://goo.gl/KXQ0x7). Default is 'en'.
 -h           Displays this help message. No further functions are performed.
