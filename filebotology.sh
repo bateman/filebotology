@@ -7,8 +7,8 @@
 #
 # Author: 	bateman
 # Date: 	Jan. 28, 2015
-# Rev:		Apr. 12, 2015
-# Ver:		0.3
+# Rev:		Apr. 14, 2015
+# Ver:		0.3.1
 ## 
 
 #Set Script Name variable
