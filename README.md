@@ -37,6 +37,6 @@ To run it from the command line,  excute the script with the -h flag to print th
 -h               Displays this help message. No further functions are performed.
 ```
 
-Example: `$ filebotology.sh -t tv -p -l it /volume1/video/tvshows`
+Example: `$ filebotology.sh -l it -t tv -p /volume1/video/tvshows`
 
 Now, sit back and relax, it's gonna take a long while if you have a large base of videos!
