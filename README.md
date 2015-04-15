@@ -29,7 +29,7 @@ An ash script (yes, Synolgy boxes run ash shell not bash) to autosearch for subt
 At the moment the script is set to download subtitles in srt format only from [OpenSubitles.org] (www.opensubtitles.org), using hash-based matching. 
 
 ## CLI execution
-To run it from the command line,  excute the script with the `-h` flag to print the following help menu.
+To run it from the command line, excute the script with the `-h` flag to print the following help menu. Please, note that the first two options `-t` and `-p` are mandatory.
 ```
 -t type      Sets the type of media to scan. Allowed values are 'tv' or 'movie'.
 -p path      Sets the path where to look for media. No default value is set.
