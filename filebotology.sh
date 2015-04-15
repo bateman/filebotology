@@ -75,9 +75,9 @@ done
 shift $((OPTIND-1))  #This tells getopts to move on to the next argument.
 ### end getopts code ###
 
-### main loop to process files ###
+### main instruction set to process files ###
 get_missing_subs $MEDIATYPE $MEDIAPATH
 rename_subs_in_path $MEDIATYPE $MEDIAPATH
+### end main ###
 
-### end main loop ###
 exit 0
