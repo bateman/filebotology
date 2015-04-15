@@ -2,24 +2,30 @@
 
 ##
 # TODO: add logging on-off switch
-#	customize languages
+#	customize languages for renaming
 #       add comments
 #
 # Author: 	bateman
 # Date: 	Jan. 28, 2015
-# Rev:		Apr. 14, 2015
-# Ver:		0.3.1
+# Rev:		Apr. 15, 2015
+# Ver:		0.4
 ## 
 
 #Set Script Name variable
 SCRIPT="filebotology.sh"
 
 # set default vars
+
+# video location
 MEDIAPATH=""
+# video type, either 'tv' or 'movie'
 MEDIATYPE=""
-LOG="/var/log/filebotology.log"
-LANG="it"
+# two-letter code for subs language, see http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+LANG="en"
+# subs format is fixed to srt
 FORMAT="srt"
+# log location is fixed; if edited, fbt-logrotate config file must be edited accordingly
+LOG="/var/log/filebotology.log"
 
 # print help instructions
 print_help() {
@@ -28,6 +34,7 @@ print_help() {
         printf "Command line switches are mandatory. The following switches are recognized.\n"
         printf "\t -t type \t --Sets the type of media to scan. Allowed values are 'tv' or 'movie'.\n"
         printf "\t -p path \t --Sets the path where to look for media. No default value is set.\n"
+	printf "\t -l lang \t --Sets the two-letter code for subs language (default is EN).\n\n"
         printf "\t -h \t\t --Displays this help message. No further functions are performed.\n\n"
         printf "Example: $SCRIPT -t tv -p /volume1/video/tvshows\n"
         exit 1
@@ -49,7 +56,7 @@ get_missing_subs() {
 # rename to chosen format
 rename_subs_in_path() {
 	printf "Renaming new subtitles in $MEDIAPATH\n"
-	filebot -r -script fn:replace --def "e=.ita.srt" "r=.it.srt" $MEDIAPATH
+	filebot -r -script fn:replace --def "e=.ita.srt" "r=.$LANG.srt" $MEDIAPATH
 	printf "Done\n"
 	printf "\n------------------------\n" >> $LOG
 }
@@ -62,10 +69,11 @@ if [ $NUMARGS -lt 2 ]; then
 fi
 
 # parse args
-while getopts "t:p:h" FLAG; do
+while getopts "t:p:l:h" FLAG; do
 	case $FLAG in
 		t) MEDIATYPE=$OPTARG;;
 		p) MEDIAPATH=$OPTARG;;
+		l) LANG=$OPTARG;;
 		h) print_help;;
 		\?) #unrecognized option - show help
 	            printf "Use $SCRIPT -h to see the help documentation.\n"
