@@ -19,7 +19,7 @@ An ash script (yes, Synolgy boxes run ash shell not bash) to autosearch for subt
   6. Go to the Control Panel ► Task Scheduler (i.e., the DSM cron equivalent) and create one or two tasks for TV Shows and/or Movies, accordingly:
    * `$ /volume1/git/filebotology/filebotology.sh -t tv -p /volume1/video/tvshows/ >> /var/log/filebotology.log`
    * `$ /volume1/git/filebotology/filebotology.sh -t movies -p /volume1/video/movies/ >> /var/log/filebotology.log`
-   * Choose how often they run; make sure to not run them at the same minute, so their execution won't overlap; use admin as task owner.
+   * Choose how often they run; make sure to not run them at the same minute, so their execution won't overlap; use root as task owner.
   7. Install the logrotate config for rotating the script log (_change the logrotate options as you wish_):
    * `$ cd /etc/logrotate.d`
    * `$ ln -s /volume1/git/filebotology/fbt-logrotate filebotology`
