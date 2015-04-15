@@ -26,7 +26,7 @@ An ash script (yes, Synolgy boxes run ash shell not bash) to autosearch for subt
    * to check the status do a `$ cat /var/lib/logrotate.status | grep filebot`, it will return something like this: `"/var/log/filebotology.log" 2015-3-21-12:0:0`
 
 ## Language
-At the moment the script is set to download Italian subtitles in srt format from OpenSubitles.org and TheMovieDB, using hash-based matching. Until I add a command line switch to select desired language(s), you will have to edit the script by hand. Look for the instruction `LANG=it` at line 23 and change it to your country's two letters code.
+At the moment the script is set to download subtitles in srt format only from OpenSubitles.org, using hash-based matching. 
 
 ## CLI execution
 To run it from the command line,  excute the script with the `-h` flag to print the following help menu.
