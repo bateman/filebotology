@@ -34,6 +34,7 @@ To run it from the command line, excute the script with the `-h` flag to print t
 -t type      Sets the type of media to scan. Allowed values are 'tv' or 'movie'.
 -p path      Sets the path where to look for media. No default value is set.
 -l language  Sets the two-letter code for subs language (ISO 639-1, see http://goo.gl/KXQ0x7). Default is 'en'.
+-v on|off    Enables/disable verbose output on the console. Default is 'off'.
 -h           Displays this help message. No further functions are performed.
 ```
 
