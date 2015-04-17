@@ -58,16 +58,16 @@ get_missing_subs() {
 	elif [ "${MEDIATYPE}" == 'movie' ]; then
 	        DB="--db TheMovieDB"
 	fi
-	print "Finding missing subtitles from $MEDIAPATH.\n"
+	print "Start finding missing subtitles from $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---\n"
 	filebot -script fn:suball -get-missing-subtitles $DB --lang $LANG --format $FORMAT $MEDIAPATH
-        print "\n--- Done with missing subs at $(date +"%Y-%m-%d %H-%M-%S") ---\n"
+        print "\n--- Done with missing subs at $(date +"%Y-%m-%d %H-%M-%S"). ---\n"
 }
 
 # rename to chosen format
 rename_subs_in_path() {
-	print "Renaming new subtitles in $MEDIAPATH.\n"
+	print "\n---- Start renaming new subtitles in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---\n"
 	filebot -r -script fn:replace --def "e=.ita.srt" "r=.$LANG.srt" $MEDIAPATH
-	print "\n---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S") ---\n" 
+	print "\n---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S"). ---\n" 
 }
 
 #Check the number of arguments. If none are passed, print help and exit.
