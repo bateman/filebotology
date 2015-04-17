@@ -45,7 +45,7 @@ print_help() {
 # redefine an echo function depending on verbose switch 
 print() {
 	if [ "${VERBOSE}" == 'on' ]; then
-		echo $1 1>&3
+		echo $1 | tee /dev/fd/3
 	else
 		echo $1 
 	fi
