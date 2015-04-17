@@ -86,7 +86,8 @@ while getopts "t:p:l:vh" FLAG; do
 		t) MEDIATYPE=$OPTARG;;
 		p) MEDIAPATH=$OPTARG;;
 		l) LANG=$OPTARG;;
-		v) VERBOSE='on';;
+		v) VERBOSE='on'
+		   printf "Entering verbose mode.\n";;
 		h) print_help;;
 		\?) #unrecognized option - show help
 	            printf "Use $SCRIPT -h to see the help documentation.\n"
