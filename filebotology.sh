@@ -1,9 +1,7 @@
 #!/bin/sh
 
 ##
-# TODO: 
-#	customize languages for renaming
-#       add comments
+# TODO: customize languages for renaming
 #
 # Author: 	bateman
 # Date: 	Jan. 28, 2015
@@ -46,11 +44,10 @@ print_help() {
 # redefine an echo function depending on verbose switch 
 print() {
 	if [ "${VERBOSE}" == 'on' ]; then
-		$STR_OUT="$1 | tee /dev/fd/3"
+		echo $1 1>&3
 	else
-		$STR_OUT=$1 
+		echo $1 
 	fi
-	echo $STR_OUT
 }
 
 # get new or missing subs
@@ -98,7 +95,7 @@ shift $((OPTIND-1))  #This tells getopts to move on to the next argument.
 ### end getopts code ###
 
 ### main instruction set to process files ###
-exec 3>&1 1>>${LOG} 2>&1 # redirects stdout and stderr to the log file
+exec 3>&1 1>>${LOG} 2>&1 # redirects stdout and stderr to the log file, binds fd 3 to stdout
 get_missing_subs $MEDIATYPE $MEDIAPATH
 rename_subs_in_path $MEDIATYPE $MEDIAPATH
 ### end main ###
