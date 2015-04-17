@@ -37,7 +37,7 @@ print_help() {
         printf "\t -t type \t --Sets the type of media to scan. Allowed values are 'tv' or 'movie'.\n"
         printf "\t -p path \t --Sets the path where to look for media. No default value is set.\n"
 	printf "\t -l lang \t --Sets the two-letter code for subs language (default is EN).\n\n"
-	printf "\t -v on|off \t --Enables/disable verbose output on the console. Default is 'off'.\n\n"
+	printf "\t -v \t\t --Enables verbose output on the console, disabled by default.\n\n"
         printf "\t -h \t\t --Displays this help message. No further functions are performed.\n\n"
         printf "Example: $SCRIPT -t tv -p /volume1/video/tvshows\n"
         exit 1
@@ -75,17 +75,18 @@ rename_subs_in_path() {
 #Check the number of arguments. If none are passed, print help and exit.
 NUMARGS=$#
 if [ $NUMARGS -lt 2 ]; then
-	printf "Wrong number of arguments, provided $NUMARGS resquested 2.\n\n"
+	printf "Wrong number of arguments, provided $NUMARGS, resquested 2.\n"
+	printf "Please, note that -p and -l arguments are mandatory. \n\n"
 	print_help;
 fi
 
 # parse args
-while getopts "t:p:l:v:h" FLAG; do
+while getopts "t:p:l:vh" FLAG; do
 	case $FLAG in
 		t) MEDIATYPE=$OPTARG;;
 		p) MEDIAPATH=$OPTARG;;
 		l) LANG=$OPTARG;;
-		v) VERBOSE=$OPTARG;;
+		v) VERBOSE='on';;
 		h) print_help;;
 		\?) #unrecognized option - show help
 	            printf "Use $SCRIPT -h to see the help documentation.\n"
