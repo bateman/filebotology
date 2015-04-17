@@ -85,16 +85,20 @@ fi
 # parse args
 while getopts "t:p:l:r:vh" FLAG; do
 	case $FLAG in
-		t) MEDIATYPE=$OPTARG;;
-		p) MEDIAPATH=$OPTARG;;
-		l) LANG=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
-		r) LANG3=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
-		v) VERBOSE='on'
-		   printf "Entering verbose mode, messages will appear in both console and log file.\n";;
-		h) print_help;;
+		t ) MEDIATYPE=$OPTARG;;
+		p ) MEDIAPATH=$OPTARG;;
+		l ) LANG=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
+		r ) LANG3=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
+		v ) VERBOSE='on'
+		    printf "Entering verbose mode, messages will appear in both console and log file.\n";;
+		h ) print_help;;
 		\?) #unrecognized option - show help
 	            printf "Use $SCRIPT -h to see the help documentation.\n"
 		    exit 2;;
+		: ) printf "Missing option argument for -$OPTARG" 
+		    exit 2;;
+        	* ) printf "Unimplemented option: -$OPTARG"
+        	    exit 2;;
         esac
 done
 shift $((OPTIND-1))  #This tells getopts to move on to the next argument.
