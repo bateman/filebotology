@@ -1,14 +1,14 @@
 #!/bin/sh
 
 ##
-# TODO: add logging on-off switch
+# TODO: 
 #	customize languages for renaming
 #       add comments
 #
 # Author: 	bateman
 # Date: 	Jan. 28, 2015
-# Rev:		Apr. 15, 2015
-# Ver:		0.4
+# Rev:		Apr. 17, 2015
+# Ver:		0.5
 ## 
 
 #Set Script Name variable
@@ -26,6 +26,10 @@ LANG="en"
 FORMAT="srt"
 # log location is fixed; if edited, fbt-logrotate config file must be edited accordingly
 LOG="/var/log/filebotology.log"
+exec 3>&1 1>>${LOG} 2>&1
+# verbose switch, default off
+VERBOSE="off"
+
 
 # print help instructions
 print_help() {
@@ -35,9 +39,21 @@ print_help() {
         printf "\t -t type \t --Sets the type of media to scan. Allowed values are 'tv' or 'movie'.\n"
         printf "\t -p path \t --Sets the path where to look for media. No default value is set.\n"
 	printf "\t -l lang \t --Sets the two-letter code for subs language (default is EN).\n\n"
+	printf "\t -v on|off \t --Enables/disable verbose output on the console. Default is 'off'.
         printf "\t -h \t\t --Displays this help message. No further functions are performed.\n\n"
         printf "Example: $SCRIPT -t tv -p /volume1/video/tvshows\n"
         exit 1
+}
+
+# redefine an echo function depending on verbose switch 
+print() {
+	if [ "${VERBOSE}" == 'on' ]; then
+		$STR_OUT="$1 | tee /dev/fd/3"
+	else
+		$STR_OUT=$1 
+	fi
+
+	echo $STR_OUT
 }
 
 # get new or missing subs
@@ -47,18 +63,16 @@ get_missing_subs() {
 	elif [ "${MEDIATYPE}" == 'movie' ]; then
 	        DB="--db TheMovieDB"
 	fi
-	printf "Finding missing subtitles from $MEDIAPATH\n"
+	print "Finding missing subtitles from $MEDIAPATH\n"
 	filebot -script fn:suball -get-missing-subtitles $DB --lang $LANG --format $FORMAT $MEDIAPATH
-	printf "Done\n"
-        printf "\n------------------------\n" >> $LOG
+        print "\n--- Done with missing subs at $(date +%s) ---\n"
 }
 
 # rename to chosen format
 rename_subs_in_path() {
-	printf "Renaming new subtitles in $MEDIAPATH\n"
+	print "Renaming new subtitles in $MEDIAPATH\n"
 	filebot -r -script fn:replace --def "e=.ita.srt" "r=.$LANG.srt" $MEDIAPATH
-	printf "Done\n"
-	printf "\n------------------------\n" >> $LOG
+	printf "\n---- Done with renaming subs at $(date +%s) ---\n" 
 }
 
 #Check the number of arguments. If none are passed, print help and exit.
@@ -69,11 +83,12 @@ if [ $NUMARGS -lt 2 ]; then
 fi
 
 # parse args
-while getopts "t:p:l:h" FLAG; do
+while getopts "t:p:l:v:h" FLAG; do
 	case $FLAG in
 		t) MEDIATYPE=$OPTARG;;
 		p) MEDIAPATH=$OPTARG;;
 		l) LANG=$OPTARG;;
+		v) VERBOSE=$OPTARG;;
 		h) print_help;;
 		\?) #unrecognized option - show help
 	            printf "Use $SCRIPT -h to see the help documentation.\n"
