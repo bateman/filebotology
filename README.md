@@ -34,10 +34,10 @@ To run it from the command line, excute the script with the `-h` flag to print t
 -t type      Sets the type of media to scan. Allowed values are 'tv' or 'movie'.
 -p path      Sets the path where to look for media. No default value is set.
 -l language  Sets the two-letter code for subs language (ISO 639-1, see http://goo.gl/KXQ0x7). Default is 'en'.
--v on|off    Enables/disable verbose output on the console. Default is 'off'.
+-v           Enables verbose output on the console, disabled by default.
 -h           Displays this help message. No further functions are performed.
 ```
 
-Example: `$ filebotology.sh -l it -t tv -p /volume1/video/tvshows`
+Example: `$ filebotology.sh -v -l it -t tv -p /volume1/video/tvshows`
 
 Now, sit back and relax, it's gonna take a long while if you have a large base of videos!
