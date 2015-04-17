@@ -74,7 +74,7 @@ rename_subs_in_path() {
 #Check the number of arguments. If none are passed, print help and exit.
 NUMARGS=$#
 if [ $NUMARGS -lt 2 ]; then
-	printf "ERROR: Wrong number of arguments, provided $NUMARGS, resquested at least 2.\n" >&2
+	printf "\nERROR: Wrong number of arguments, provided $NUMARGS, resquested at least 2.\n\n" >&2
 	print_help;
 fi
 
@@ -101,7 +101,7 @@ shift $((OPTIND-1))  #This tells getopts to move on to the next argument.
 ### end getopts code ###
 
 if [ "${MEDIAPATH}" == "" ] || [ "${MEDIATYPE}" == "" ]; then
-    echo "ERROR: -t or -p options are missing" >&2
+    echo "\nERROR: -t or -p options are missing.\n\n" >&2
     print_help
 fi
 
