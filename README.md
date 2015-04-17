@@ -1,5 +1,5 @@
 # filebotology
-An ash script (yes, Synolgy boxes run ash shell not bash) to autosearch for subtitles on a Synology NAS. This script relies on [Filebot cli] (http://www.filebot.net/cli.html) capabilities to automate the search of subtitles for your videos stored in your beloved Synology NAS.
+An ash script (yes, Synolgy boxes run ash shell not bash through Busybox) to autosearch for subtitles on a NAS. This script relies on [Filebot cli] (http://www.filebot.net/cli.html) capabilities to automate the search of subtitles for your videos stored in your beloved Synology NAS.
 
 ## Requirements
   * Filebot
@@ -7,7 +7,7 @@ An ash script (yes, Synolgy boxes run ash shell not bash) to autosearch for subt
 
 ## Installation
   1. First things first, go to Package Center ► Settings ► Trust Level: Anyone.
-  2. Instal Java 8 SE Embedded for ARM architecture. Note that, as of this writing, ver. 8 is not supported as an official package from Synology through the _Package center_ -- the Java Manager is infact stuck at ver. 7. Therefore, you need to add a custom Package Source: go to Package Center ► Settings ► Package Sources ► Add ► Name: SynologyItalia and Location:  [http://spk.synologyitalia.com/] (http://spk.synologyitalia.com/) ► OK. After that, Java 8 should show up with other extra packages in the Community list. (*Make sure to pick the one that's right for your CPU model!* See [here] (http://forum.synology.com/wiki/index.php/What_kind_of_CPU_does_my_NAS_have) if you don't know already.)
+  2. Install _Java 8 SE Embedded_ for ARM architecture. Note that, as of this writing, ver. 8 is not supported as an official package from Synology through the _Package center_ -- the Java Manager is infact stuck at ver. 7. Therefore, you need to add a custom Package Source: go to Package Center ► Settings ► Package Sources ► Add ► Name: SynologyItalia and Location:  [http://spk.synologyitalia.com/] (http://spk.synologyitalia.com/) ► OK. After that, Java 8 should show up with other extra packages in the Community list. (*Make sure to pick the one that's right for your CPU model!* See [here] (http://forum.synology.com/wiki/index.php/What_kind_of_CPU_does_my_NAS_have) if you don't know already.)
   2. Add Package Source also for _Filebot_; go to Package Center ► Settings ► Package Sources ► Add ► Name: FileBot and Location: [https://packages.filebot.net/syno/] (https://packages.filebot.net/syno/) ► OK. Now find and install it from Community packages list.
   3. Also from the community packages, select and install _Git_ to ease the download of the script itself.
   4. Got to [www.opensubtitles.org] (www.opensubtitles.org) and sign up; now open an SSH session, and run the following from command line:
