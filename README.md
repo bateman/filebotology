@@ -29,14 +29,14 @@ An ash script (yes, Synolgy boxes run ash shell not bash) to autosearch for subt
 At the moment the script is set to download subtitles in srt format only from [OpenSubitles.org] (www.opensubtitles.org), using hash-based matching. 
 
 ## CLI execution
-To run it from the command line, excute the script with the `-h` flag to print the following help menu. Please, note that the first two options `-t` and `-p` are mandatory.
+To run it from the command line, excute the script with the `-h` flag to print the following help menu. Please, note that the first two options `-t` and `-p` are **mandatory**.
 ```
--t type      Sets the type of media to scan. Allowed values are 'tv' or 'movie'.
--p path      Sets the path where to look for media. No default value is set.
--l language  Sets the two-letter code for subs language (ISO 639-1, see http://goo.gl/KXQ0x7). Default is 'en'.
--r language  Renames subs from the three-letter code (ISO 639-2) to the two-letter one. Must match -l argument when provided.
--v           Enables verbose output on the console, disabled by default.
--h           Displays this help message. No further functions are performed.
+-t type  Sets the type of media to scan. Allowed values are 'tv' and 'movie'.
+-p path  Sets the path where to look for media. No default value is set.
+-l lang  Sets the two-letter code for subs language (ISO 639-1, see http://goo.gl/KXQ0x7). Default is 'en'.
+-r lang  Renames subs from the three-letter code (ISO 639-2) to the two-letter one. Must match -l argument when provided.
+-v       Enables verbose output on the console, disabled by default.
+-h       Displays this help message. No further functions are performed.
 ```
 
 Example: `$ filebotology.sh -v -l it -r ita -t tv -p /volume1/video/tvshows`
