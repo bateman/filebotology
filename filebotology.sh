@@ -69,7 +69,7 @@ get_missing_subs() {
 rename_subs_in_path() {
 	print "Renaming new subtitles in $MEDIAPATH\n"
 	filebot -r -script fn:replace --def "e=.ita.srt" "r=.$LANG.srt" $MEDIAPATH
-	printf "\n---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S") ---\n" 
+	print "\n---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S") ---\n" 
 }
 
 #Check the number of arguments. If none are passed, print help and exit.
