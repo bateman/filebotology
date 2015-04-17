@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ##
-# TODO: customize languages for renaming
+# TODO: force lowercase on languages
 #	add control of mandatory args
 #
 # Author: 	bateman
@@ -35,12 +35,12 @@ print_help() {
         printf "Help documentation $SCRIPT\n\n"
         printf "Basic usage:\n"
         printf "Command line switches are mandatory. The following switches are recognized.\n"
-        printf "\t -t type \t --Sets the type of media to scan. Allowed values are 'tv' or 'movie'.\n"
-        printf "\t -p path \t --Sets the path where to look for media. No default value is set.\n"
-	printf "\t -l lang \t --Sets the two-letter code for subs language (default is 'en').\n\n"
-	printf "\t -v \t\t --Enables verbose output on the console, disabled by default.\n\n"
-	printf "\t -r code -- Renames subs replacing 3-letter code with 2-letter one (e.g, from 'eng' to 'en'). Must match -l param when provided. Default is 'en'\n\n"
-        printf "\t -h \t\t --Displays this help message. No further functions are performed.\n\n"
+        printf "\t -t type \t -- Sets the type of media to scan. Allowed values are 'tv' or 'movie'.\n"
+        printf "\t -p path \t -- Sets the path where to look for media. No default value is set.\n"
+	printf "\t -l lang \t -- Sets the two-letter code for subs language (default is 'en').\n\n"
+	printf "\t -r lang \t -- Renames subs replacing 3-letter code with 2-letter one (e.g, from 'eng' to 'en'). Must match -l arg.\n\n"
+	printf "\t -v \t\t -- Enables verbose output on the console, disabled by default.\n\n"
+        printf "\t -h \t\t -- Displays this help message. No further functions are performed.\n\n"
         printf "Example: $SCRIPT -t tv -p /volume1/video/tvshows\n"
         exit 1
 }
@@ -84,14 +84,14 @@ if [ $NUMARGS -lt 2 ]; then
 fi
 
 # parse args
-while getopts "t:p:l:vh" FLAG; do
+while getopts "t:p:l:r:vh" FLAG; do
 	case $FLAG in
 		t) MEDIATYPE=$OPTARG;;
 		p) MEDIAPATH=$OPTARG;;
 		l) LANG=$OPTARG;;
+		r) LANG3=$OPTARG;;
 		v) VERBOSE='on'
 		   printf "Entering verbose mode, messages will appear in both console and log file.\n";;
-		r) LANG3=$OPTARG;;
 		h) print_help;;
 		\?) #unrecognized option - show help
 	            printf "Use $SCRIPT -h to see the help documentation.\n"
