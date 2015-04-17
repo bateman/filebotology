@@ -1,5 +1,6 @@
 # filebotology
-An ash script (yes, Synology boxes run ash shell not bash through Busybox) to autosearch for subtitles on a NAS. This script relies on [Filebot cli] (http://www.filebot.net/cli.html) capabilities to automate the search of subtitles for your videos stored in your beloved Synology NAS.
+An ash script (yes, Synology boxes run ash shell not bash through Busybox) to autosearch for subtitles on a NAS. 
+This script relies on [Filebot cli] (http://www.filebot.net/cli.html) capabilities to automate the search of subtitles for your videos stored in your beloved Synology NAS.
 
 ## Requirements
   * Filebot
