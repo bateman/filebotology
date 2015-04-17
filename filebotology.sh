@@ -1,13 +1,12 @@
 #!/bin/sh
 
 ##
-# TODO: force lowercase on languages
-#	add control of mandatory args
+# TODO: 	add control of mandatory args
 #
 # Author: 	bateman
 # Date: 	Jan. 28, 2015
 # Rev:		Apr. 17, 2015
-# Ver:		0.6
+# Ver:		0.7
 ## 
 
 #Set Script Name variable
@@ -88,8 +87,8 @@ while getopts "t:p:l:r:vh" FLAG; do
 	case $FLAG in
 		t) MEDIATYPE=$OPTARG;;
 		p) MEDIAPATH=$OPTARG;;
-		l) LANG=$OPTARG;;
-		r) LANG3=$OPTARG;;
+		l) LANG=$(echo "$OPTARG" | tr '[:upper:]' '[:lower:]');; # to lower case
+		r) LANG3=$(echo "$OPTARG" | tr '[:upper:]' '[:lower:]');; # to lower case
 		v) VERBOSE='on'
 		   printf "Entering verbose mode, messages will appear in both console and log file.\n";;
 		h) print_help;;
