@@ -87,8 +87,8 @@ while getopts "t:p:l:r:vh" FLAG; do
 	case $FLAG in
 		t) MEDIATYPE=$OPTARG;;
 		p) MEDIAPATH=$OPTARG;;
-		l) LANG=$(echo "$OPTARG" | tr '[:upper:]' '[:lower:]');; # to lower case
-		r) LANG3=$(echo "$OPTARG" | tr '[:upper:]' '[:lower:]');; # to lower case
+		l) LANG=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
+		r) LANG3=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
 		v) VERBOSE='on'
 		   printf "Entering verbose mode, messages will appear in both console and log file.\n";;
 		h) print_help;;
