@@ -7,7 +7,7 @@
 # Author: 	bateman
 # Date: 	Jan. 28, 2015
 # Rev:		Apr. 17, 2015
-# Ver:		0.5
+# Ver:		0.6
 ## 
 
 #Set Script Name variable
@@ -20,6 +20,8 @@ MEDIAPATH=""
 MEDIATYPE=""
 # two-letter code for subs language, see http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 LANG="en"
+# three-letter code for same language, LANG and LANG3 must always match when -r argument is passed
+LANG3=""
 # subs format is fixed to srt
 FORMAT="srt"
 # log location is fixed; if edited, fbt-logrotate config file must be edited accordingly
@@ -35,8 +37,9 @@ print_help() {
         printf "Command line switches are mandatory. The following switches are recognized.\n"
         printf "\t -t type \t --Sets the type of media to scan. Allowed values are 'tv' or 'movie'.\n"
         printf "\t -p path \t --Sets the path where to look for media. No default value is set.\n"
-	printf "\t -l lang \t --Sets the two-letter code for subs language (default is EN).\n\n"
+	printf "\t -l lang \t --Sets the two-letter code for subs language (default is 'en').\n\n"
 	printf "\t -v \t\t --Enables verbose output on the console, disabled by default.\n\n"
+	printf "\t -r code -- Renames subs replacing 3-letter code with 2-letter one (e.g, from 'eng' to 'en'). Must match -l param when provided. Default is 'en'\n\n"
         printf "\t -h \t\t --Displays this help message. No further functions are performed.\n\n"
         printf "Example: $SCRIPT -t tv -p /volume1/video/tvshows\n"
         exit 1
@@ -65,9 +68,11 @@ get_missing_subs() {
 
 # rename to chosen format
 rename_subs_in_path() {
-	print "\n---- Start renaming new subtitles in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---\n"
-	filebot -r -script fn:replace --def "e=.ita.srt" "r=.$LANG.srt" $MEDIAPATH
-	print "\n---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S"). ---\n" 
+	if [ "$LANG3i != "" ]; then
+		print "\n---- Start renaming new subtitles in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---\n"
+		filebot -r -script fn:replace --def "e=.$LANG3.srt" "r=.$LANG.srt" $MEDIAPATH
+		print "\n---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S"). ---\n" 
+	fi
 }
 
 #Check the number of arguments. If none are passed, print help and exit.
@@ -86,6 +91,7 @@ while getopts "t:p:l:vh" FLAG; do
 		l) LANG=$OPTARG;;
 		v) VERBOSE='on'
 		   printf "Entering verbose mode, messages will appear in both console and log file.\n";;
+		r) LANG3=$OPTARG;;
 		h) print_help;;
 		\?) #unrecognized option - show help
 	            printf "Use $SCRIPT -h to see the help documentation.\n"
