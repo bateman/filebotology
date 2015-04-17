@@ -25,9 +25,6 @@ An ash script (yes, Synolgy boxes run ash shell not bash through Busybox) to aut
    * `$ ln -s /volume1/git/filebotology/fbt-logrotate filebotology`
    * to check the status do a `$ cat /var/lib/logrotate.status | grep filebot`, it will return something like this: `"/var/log/filebotology.log" 2015-3-21-12:0:0`
 
-## Language
-At the moment the script is set to download subtitles in srt format only from [OpenSubitles.org] (www.opensubtitles.org), using hash-based matching. 
-
 ## CLI execution
 To run it from the command line, excute the script with the `-h` flag to print the following help menu. Please, note that the first two options `-t` and `-p` are **mandatory**.
 ```
@@ -42,3 +39,7 @@ To run it from the command line, excute the script with the `-h` flag to print t
 Example: `$ filebotology.sh -v -l it -r ita -t tv -p /volume1/video/tvshows`
 
 Now, sit back and relax, it's gonna take a long while if you have a large base of videos!
+
+## Notes
+* At the moment the script is set to download subtitles only in `srt` format from [OpenSubitles.org] (www.opensubtitles.org), using hash-based matching. 
+* If you are some kind of a *nix shell hacker and find some quirks in the script, keep in mind that the ash shell implementation of Busybox is somewhat limited, so not all functions normally found in a full-fledged shell are available here.
