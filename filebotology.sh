@@ -75,7 +75,6 @@ rename_subs_in_path() {
 NUMARGS=$#
 if [ $NUMARGS -lt 2 ]; then
 	printf "Wrong number of arguments, provided $NUMARGS, resquested 2.\n" >&2
-	printf "Please, note that -p and -l arguments are mandatory. \n\n" >&2
 	print_help;
 fi
 
