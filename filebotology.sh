@@ -2,6 +2,7 @@
 
 ##
 # TODO: customize languages for renaming
+#	add control of mandatory args
 #
 # Author: 	bateman
 # Date: 	Jan. 28, 2015
