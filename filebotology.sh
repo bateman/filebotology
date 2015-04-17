@@ -37,7 +37,7 @@ print_help() {
         printf "\t -t type \t --Sets the type of media to scan. Allowed values are 'tv' or 'movie'.\n"
         printf "\t -p path \t --Sets the path where to look for media. No default value is set.\n"
 	printf "\t -l lang \t --Sets the two-letter code for subs language (default is EN).\n\n"
-	printf "\t -v on|off \t --Enables/disable verbose output on the console. Default is 'off'.
+	printf "\t -v on|off \t --Enables/disable verbose output on the console. Default is 'off'.\n\n"
         printf "\t -h \t\t --Displays this help message. No further functions are performed.\n\n"
         printf "Example: $SCRIPT -t tv -p /volume1/video/tvshows\n"
         exit 1
