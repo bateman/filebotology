@@ -68,7 +68,7 @@ get_missing_subs() {
 
 # rename to chosen format
 rename_subs_in_path() {
-	if [ "$LANG3i != "" ]; then
+	if [ "${LANG3}" != "" ]; then
 		print "\n---- Start renaming new subtitles in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---\n"
 		filebot -r -script fn:replace --def "e=.$LANG3.srt" "r=.$LANG.srt" $MEDIAPATH
 		print "\n---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S"). ---\n" 
