@@ -15,7 +15,6 @@
 SCRIPT="filebotology.sh"
 
 # set default vars
-
 # video location
 MEDIAPATH=""
 # video type, either 'tv' or 'movie'
@@ -26,7 +25,6 @@ LANG="en"
 FORMAT="srt"
 # log location is fixed; if edited, fbt-logrotate config file must be edited accordingly
 LOG="/var/log/filebotology.log"
-exec 3>&1 1>>${LOG} 2>&1
 # verbose switch, default off
 VERBOSE="off"
 
@@ -52,7 +50,6 @@ print() {
 	else
 		$STR_OUT=$1 
 	fi
-
 	echo $STR_OUT
 }
 
@@ -99,6 +96,7 @@ shift $((OPTIND-1))  #This tells getopts to move on to the next argument.
 ### end getopts code ###
 
 ### main instruction set to process files ###
+exec 3>&1 1>>${LOG} 2>&1 # redirects stdout and stderr to the log file
 get_missing_subs $MEDIATYPE $MEDIAPATH
 rename_subs_in_path $MEDIATYPE $MEDIAPATH
 ### end main ###
