@@ -3,7 +3,7 @@
 ##
 # Author: 	bateman
 # Date: 	Jan. 28, 2015
-# Rev:		Apr. 17, 2015
+# Rev:		Apr. 19, 2015
 # Ver:		1.0
 ## 
 
@@ -33,9 +33,9 @@ print_help() {
         printf "The following command line options are recognized, -t and -p are mandatory.\n"
         printf "\t -t type \t -- Mandatory, sets the type of media to scan. Allowed values are 'tv' or 'movie'.\n"
         printf "\t -p path \t -- Mandatory, sets the path where to look for media.\n"
-	printf "\t -l lang \t -- Sets the two-letter code for subs language (default arg is 'en').\n"
-	printf "\t -r lang \t -- Renames subs replacing 3-letter code with 2-letter one (e.g, from 'eng' to 'en'). Must match -l arg.\n"
-	printf "\t -v \t\t -- Enables verbose output on the console, disabled by default.\n"
+		printf "\t -l lang \t -- Sets the two-letter code for subs language (default arg is 'en').\n"
+		printf "\t -r lang \t -- Renames subs replacing 3-letter code with 2-letter one (e.g, from 'eng' to 'en'). Must match -l arg.\n"
+		printf "\t -v \t\t -- Enables verbose output on the console, disabled by default.\n"
         printf "\t -h \t\t -- Displays this help message. No further functions are performed.\n\n"
         printf "Example: $SCRIPT -t tv -p /volume1/video/tvshows\n"
         exit 1
@@ -57,24 +57,24 @@ get_missing_subs() {
 	elif [ "${MEDIATYPE}" == 'movie' ]; then
 	        DB="--db TheMovieDB"
 	fi
-	print "Start finding missing subtitles in $LANG from $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---\n"
+	print "--- Start finding missing subtitles in $LANG from $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
 	filebot -script fn:suball -get-missing-subtitles $DB --lang $LANG --format $FORMAT $MEDIAPATH
-        print "\n--- Done with missing subs at $(date +"%Y-%m-%d %H-%M-%S"). ---\n"
+        print "--- Done with missing subs at $(date +"%Y-%m-%d %H-%M-%S"). ---"
 }
 
 # rename to chosen format
 rename_subs_in_path() {
 	if [ "${LANG3}" != "" ]; then
-		print "\n---- Start renaming subtitles from $LANG3 to $LANG in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---\n"
+		print "---- Start renaming subtitles from $LANG3 to $LANG in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
 		filebot -r -script fn:replace --def "e=.$LANG3.srt" "r=.$LANG.srt" $MEDIAPATH
-		print "\n---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S"). ---\n" 
+		print "---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S"). ---" 
 	fi
 }
 
 #Check the number of arguments. If none are passed, print help and exit.
 NUMARGS=$#
 if [ $NUMARGS -lt 2 ]; then
-	printf "\nERROR: Wrong number of arguments, provided $NUMARGS, resquested at least 2.\n\n" >&2
+	printf "\nERROR: Wrong number of arguments, provided $NUMARGS, requested at least 2.\n\n" >&2
 	print_help;
 fi
 
