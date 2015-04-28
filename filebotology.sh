@@ -16,8 +16,8 @@ MEDIAPATH=""
 # video type, either 'tv' or 'movie'
 MEDIATYPE=""
 # two-letter code for subs language, see http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
-LANG="en"
-# three-letter code for same language, LANG and LANG3 must always match when -r argument is passed
+LANG2="en"
+# three-letter code for same language, LANG2 and LANG3 must always match when -r argument is passed
 LANG3=""
 # subs format is fixed to srt
 FORMAT="srt"
@@ -57,16 +57,16 @@ get_missing_subs() {
 	elif [ "${MEDIATYPE}" == 'movie' ]; then
 		DB="--db TheMovieDB"
 	fi
-	print "--- Start finding missing subtitles in $LANG from $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
-	filebot -script fn:suball -get-missing-subtitles $DB --lang $LANG --format $FORMAT $MEDIAPATH  # FIXME #8 output not appearing in console w/ -v
+	print "--- Start finding missing subtitles in $LANG2 from $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
+	filebot -script fn:suball -get-missing-subtitles $DB --lang $LANG2 --format $FORMAT $MEDIAPATH  # FIXME #8 output not appearing in console w/ -v
 	print "--- Done with missing subs at $(date +"%Y-%m-%d %H-%M-%S"). ---"
 }
 
 # rename to chosen format
 rename_subs_in_path() {
 	if [ "${LANG3}" != "" ]; then
-		print "---- Start renaming subtitles from $LANG3 to $LANG in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
-		filebot -r -script fn:replace --def "e=.$LANG3.srt" "r=.$LANG.srt" $MEDIAPATH # FIXME #8 output not appearing in console w/ -v
+		print "---- Start renaming subtitles from $LANG3 to $LANG2 in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
+		filebot -r -script fn:replace --def "e=.$LANG3.srt" "r=.$LANG2.srt" $MEDIAPATH # FIXME #8 output not appearing in console w/ -v
 		print "---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S"). ---" 
 	fi
 }
@@ -92,7 +92,7 @@ while getopts "t:p:l:r:vh" FLAG; do
 				echo "\nERROR: -p option argument is missing.\n\n" >&2
 				print_help
 			fi;;
-		l ) LANG=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
+		l ) LANG2=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
 		r ) LANG3=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
 		v ) VERBOSE='on'
 			printf "Entering verbose mode, messages will appear in both console and log file.\n";;
