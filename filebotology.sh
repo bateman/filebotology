@@ -25,6 +25,7 @@ FORMAT="srt"
 LOG="/var/log/filebotology.log"
 # verbose switch, default off
 VERBOSE="off"
+VERB_CMD=""
 
 
 # print help instructions
@@ -44,7 +45,7 @@ print_help() {
 # redefine an echo function depending on verbose switch 
 print() {
 	if [ "${VERBOSE}" == 'on' ]; then
-		echo $1 | tee /dev/fd/3
+		echo $1 $VERB_CMD
 	else
 		echo $1 
 	fi
@@ -58,7 +59,7 @@ get_missing_subs() {
 		DB="--db TheMovieDB"
 	fi
 	print "--- Start finding missing subtitles in $LANG2 from $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
-	filebot -script fn:suball -get-missing-subtitles $DB --lang $LANG2 --format $FORMAT $MEDIAPATH  # FIXME #8 output not appearing in console w/ -v
+	filebot -script fn:suball -get-missing-subtitles $DB --lang $LANG2 --format $FORMAT $MEDIAPATH $VERB_CMD
 	print "--- Done with missing subs at $(date +"%Y-%m-%d %H-%M-%S"). ---"
 }
 
@@ -66,7 +67,7 @@ get_missing_subs() {
 rename_subs_in_path() {
 	if [ "${LANG3}" != "" ]; then
 		print "---- Start renaming subtitles from $LANG3 to $LANG2 in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
-		filebot -r -script fn:replace --def "e=.$LANG3.srt" "r=.$LANG2.srt" $MEDIAPATH # FIXME #8 output not appearing in console w/ -v
+		filebot -r -script fn:replace --def "e=.$LANG3.srt" "r=.$LANG2.srt" $MEDIAPATH $VERB_CMD
 		print "---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S"). ---" 
 	fi
 }
@@ -95,6 +96,7 @@ while getopts "t:p:l:r:vh" FLAG; do
 		l ) LANG2=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
 		r ) LANG3=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
 		v ) VERBOSE='on'
+			VERB_CMD=" | tee /dev/fd/3"
 			printf "Entering verbose mode, messages will appear in both console and log file.\n";;
 		h ) print_help;;
 		\?) #unrecognized option - show help
