@@ -69,17 +69,18 @@ get_missing_subs() {
 	elif [ "${MEDIATYPE}" == 'movie' ]; then
 		DB="--db TheMovieDB"
 	fi
-	print "NOTICE" "--- Start finding missing subtitles in $LANG2 from $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
-	filebot -script fn:suball -get-missing-subtitles $DB --lang $LANG2 --format $FORMAT $MEDIAPATH $VERB_CMD
-	print "NOTICE" "--- Done with missing subs at $(date +"%Y-%m-%d %H-%M-%S"). ---"
+	
+	print "--- Start finding missing subtitles in $LANG2 from $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
+	filebot -script fn:suball -get-missing-subtitles $DB --lang $LANG2 --format $FORMAT $MEDIAPATH $VERB_CMD | tee -a $LOG
+	print "--- Done with missing subs at $(date +"%Y-%m-%d %H-%M-%S"). ---"
 }
 
 # rename to chosen format
 rename_subs_in_path() {
 	if [ "${LANG3}" != "" ]; then
-		print "NOTICE" "---- Start renaming subtitles from $LANG3 to $LANG2 in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
-		filebot -r -script fn:replace --def "e=.$LANG3.srt" "r=.$LANG2.srt" $MEDIAPATH $VERB_CMD
-		print "NOTICE" "---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S"). ---" 
+		print "---- Start renaming subtitles from $LANG3 to $LANG2 in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
+		filebot -r -script fn:replace --def "e=.$LANG3.srt" "r=.$LANG2.srt" $MEDIAPATH $VERB_CMD | tee -a $LOG
+		print "---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S"). ---" 
 	fi
 }
 
