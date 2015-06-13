@@ -29,6 +29,7 @@ VERBOSE="off"
 # loads color env vars for stdout colors
 source ./colors.inc.sh
 
+
 # print help instructions
 print_help() {
 		printf "\nHelp documentation for ${CYAN}$SCRIPT ${NC}\n\n"
@@ -70,17 +71,17 @@ get_missing_subs() {
 		DB="--db TheMovieDB"
 	fi
 	
-	print "--- Start finding missing subtitles in $LANG2 from $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
+	print "NOTICE" "--- Start finding missing subtitles in $LANG2 from $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
 	filebot -script fn:suball -get-missing-subtitles $DB --lang $LANG2 --format $FORMAT $MEDIAPATH $VERB_CMD | tee -a $LOG
-	print "--- Done with missing subs at $(date +"%Y-%m-%d %H-%M-%S"). ---"
+	print "NOTICE" "--- Done with missing subs at $(date +"%Y-%m-%d %H-%M-%S"). ---"
 }
 
 # rename to chosen format
 rename_subs_in_path() {
 	if [ "${LANG3}" != "" ]; then
-		print "---- Start renaming subtitles from $LANG3 to $LANG2 in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
+		print "NOTICE" "---- Start renaming subtitles from $LANG3 to $LANG2 in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
 		filebot -r -script fn:replace --def "e=.$LANG3.srt" "r=.$LANG2.srt" $MEDIAPATH $VERB_CMD | tee -a $LOG
-		print "---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S"). ---" 
+		print "NOTICE" "---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S"). ---" 
 	fi
 }
 
