@@ -104,11 +104,11 @@ while getopts "t:p:l:r:vh" FLAG; do
 			print "INFO" "Entering verbose mode, messages will appear in both console and log file.";;
 		h ) print_help;;
 		\?) #unrecognized option - show help
-			printf "INFO" "Use $SCRIPT -h to see the help documentation." #>&2
+			printf "INFO" "Use $SCRIPT -h to see the help documentation." 
 			exit 2;;
-		: ) print "ERROR" "Missing option argument for -$OPTARG" #>&2
+		: ) print "ERROR" "Missing option argument for -$OPTARG"
 			exit 2;;
-		* ) printf "ERROR" "Unimplemented option: -$OPTARG" #>&2
+		* ) printf "ERROR" "Unimplemented option: -$OPTARG" 
 			exit 2;;
 		esac
 done
