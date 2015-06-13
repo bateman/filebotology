@@ -25,7 +25,6 @@ FORMAT="srt"
 LOG="/var/log/filebotology.log"
 # verbose switch, default off
 VERBOSE="off"
-VERB_CMD=""
 
 
 # print help instructions
@@ -45,7 +44,7 @@ print_help() {
 # redefine an echo function depending on verbose switch 
 print() {
 	if [ "${VERBOSE}" == 'on' ]; then
-		echo $1 $VERB_CMD
+		echo $1 | tee -a $LOG
 	else
 		echo $1 
 	fi
@@ -96,7 +95,6 @@ while getopts "t:p:l:r:vh" FLAG; do
 		l ) LANG2=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
 		r ) LANG3=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
 		v ) VERBOSE='on'
-			VERB_CMD=" | tee /dev/fd/3"
 			printf "Entering verbose mode, messages will appear in both console and log file.\n";;
 		h ) print_help;;
 		\?) #unrecognized option - show help
@@ -112,7 +110,11 @@ shift $((OPTIND-1))  #This tells getopts to move on to the next argument.
 ### end getopts code ###
 
 ### main instruction set to process files ###
-exec 3>&1 1>>${LOG} 2>&1 # redirects stdout and stderr to the log file, binds fd 3 to stdout
+if [ $VERBOSE = "on" ]; then
+	exec 2>&1 # redirects stderr to to stdout
+else
+	exec 2>&1 1>>$LOG # redirects stderr to stdout, both to LOG file
+fi
 get_missing_subs $MEDIATYPE $MEDIAPATH
 rename_subs_in_path $MEDIATYPE $MEDIAPATH
 ### end main ###
