@@ -3,8 +3,8 @@
 ##
 # Author: 	bateman
 # Date: 	Jan. 28, 2015
-# Rev:		Apr. 19, 2015
-# Ver:		1.0
+# Rev:		Jun. 13, 2015
+# Ver:		1.2
 ## 
 
 #Set Script Name variable
@@ -26,27 +26,39 @@ LOG="/var/log/filebotology.log"
 # verbose switch, default off
 VERBOSE="off"
 
+# loads color env vars for stdout colors
+source ./colors.inc.sh
 
 # print help instructions
 print_help() {
-		printf "Help documentation $SCRIPT\n\n"
+		printf "\nHelp documentation for ${CYAN}$SCRIPT ${NC}\n\n"
 		printf "The following command line options are recognized, -t and -p are mandatory.\n"
-		printf "\t -t type \t -- Mandatory, sets the type of media to scan. Allowed values are 'tv' or 'movie'.\n"
-		printf "\t -p path \t -- Mandatory, sets the path where to look for media.\n"
-		printf "\t -l lang \t -- Sets the two-letter code for subs language (default arg is 'en').\n"
-		printf "\t -r lang \t -- Renames subs replacing 3-letter code with 2-letter one (e.g, from 'eng' to 'en'). Must match -l arg.\n"
-		printf "\t -v \t\t -- Enables verbose output on the console, disabled by default.\n"
-		printf "\t -h \t\t -- Displays this help message. No further functions are performed.\n\n"
-		printf "Example: $SCRIPT -t tv -p /volume1/video/tvshows\n"
+		printf "\t ${YELLOW}-t ${PURPLE}type ${NC}\t -- Mandatory, sets the type of media to scan. Allowed values are 'tv' or 'movie'.\n"
+		printf "\t ${YELLOW}-p ${PURPLE}path ${NC}\t -- Mandatory, sets the path where to look for media.\n"
+		printf "\t ${YELLOW}-l ${PURPLE}lang ${NC}\t -- Sets the two-letter code for subs language (default arg is 'en').\n"
+		printf "\t ${YELLOW}-r ${PURPLE}lang ${NC}\t -- Renames subs replacing 3-letter code with 2-letter one (e.g, from 'eng' to 'en'). Must match -l arg.\n"
+		printf "\t ${YELLOW}-v ${NC}\t\t -- Enables verbose output on the console, disabled by default.\n"
+		printf "\t ${YELLOW}-h ${NC}\t\t -- Displays this help message. No further functions are performed.\n\n"
+		printf "Example: ${CYAN}$SCRIPT -t tv -p /volume1/video/tvshows ${NC}\n\n"
 		exit 1
 }
 
 # redefine an echo function depending on verbose switch 
 print() {
+	level=$1
+        code=$GREEN # default is "NOTICE"
+        if [ "${level}" = 'ERROR' ]; then
+		code=$RED
+	elif [ "${level}" = 'INFO' ]; then
+		code=$CYAN
+	fi
+	
 	if [ "${VERBOSE}" == 'on' ]; then
-		echo $1 | tee -a $LOG
+		printf "${code}[${level}]: ${NC}" | tee -a $LOG
+		echo $2 | tee -a $LOG
 	else
-		echo $1 
+		printf "${code}[${level}]: ${NC}"
+		echo $2 
 	fi
 }
 
@@ -57,52 +69,44 @@ get_missing_subs() {
 	elif [ "${MEDIATYPE}" == 'movie' ]; then
 		DB="--db TheMovieDB"
 	fi
-	print "--- Start finding missing subtitles in $LANG2 from $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
+	print "NOTICE" "--- Start finding missing subtitles in $LANG2 from $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
 	filebot -script fn:suball -get-missing-subtitles $DB --lang $LANG2 --format $FORMAT $MEDIAPATH $VERB_CMD
-	print "--- Done with missing subs at $(date +"%Y-%m-%d %H-%M-%S"). ---"
+	print "NOTICE" "--- Done with missing subs at $(date +"%Y-%m-%d %H-%M-%S"). ---"
 }
 
 # rename to chosen format
 rename_subs_in_path() {
 	if [ "${LANG3}" != "" ]; then
-		print "---- Start renaming subtitles from $LANG3 to $LANG2 in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
+		print "NOTICE" "---- Start renaming subtitles from $LANG3 to $LANG2 in $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S"). ---"
 		filebot -r -script fn:replace --def "e=.$LANG3.srt" "r=.$LANG2.srt" $MEDIAPATH $VERB_CMD
-		print "---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S"). ---" 
+		print "NOTICE" "---- Done with renaming subs at $(date +"%Y-%m-%d %H-%M-%S"). ---" 
 	fi
 }
-
-#Check the number of arguments. At least -t and -p must be passed (2), with their arguments (2)
-#Otherwise, print help and exit
-NUMARGS=$#
-if [ $NUMARGS -lt 4 ]; then
-	printf "\nERROR: Wrong number of arguments, provided $((NUMARGS / 2)), requested at least 2.\n\n" >&2
-	print_help
-fi
 
 # parse args
 while getopts "t:p:l:r:vh" FLAG; do
 	case $FLAG in
 		t ) MEDIATYPE=$OPTARG
 			if [ "${MEDIATYPE}" != "tv" ] && [ "${MEDIATYPE}" != "movie" ]; then 
-				echo "\nERROR: -t option either is missing or has wrong argument.\n\n" >&2
+				print "ERROR" "-t option either is missing or has wrong argument." #>&2
 				print_help
 			fi;;
 		p ) MEDIAPATH=$OPTARG
 			if [ "${MEDIAPATH}" == "" ]; then
-				echo "\nERROR: -p option argument is missing.\n\n" >&2
+				print "ERROR" "-p option argument is missing." #>&2
 				print_help
 			fi;;
 		l ) LANG2=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
 		r ) LANG3=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
 		v ) VERBOSE='on'
-			printf "Entering verbose mode, messages will appear in both console and log file.\n";;
+			print "INFO" "Entering verbose mode, messages will appear in both console and log file.";;
 		h ) print_help;;
 		\?) #unrecognized option - show help
-			printf "Use $SCRIPT -h to see the help documentation.\n" >&2
+			printf "INFO" "Use $SCRIPT -h to see the help documentation." #>&2
 			exit 2;;
-		: ) printf "Missing option argument for -$OPTARG" >&2
+		: ) print "ERROR" "Missing option argument for -$OPTARG" #>&2
 			exit 2;;
-		* ) printf "Unimplemented option: -$OPTARG" >&2
+		* ) printf "ERROR" "Unimplemented option: -$OPTARG" #>&2
 			exit 2;;
 		esac
 done
