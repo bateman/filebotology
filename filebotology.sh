@@ -97,6 +97,9 @@ while getopts "t:p:l:r:vh" FLAG; do
 			if [ "${MEDIAPATH}" == "" ]; then
 				print "ERROR" "-p option argument is missing." #>&2
 				print_help
+			elif [ ! -d "${MEDIAPATH}" ]; then
+				print "ERROR" "Directory ${MEDIAPATH} does not exist."
+				exit 2
 			fi;;
 		l ) LANG2=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
 		r ) LANG3=$(echo "$OPTARG" | tr '[A-Z]' '[a-z]');; # to lower case
