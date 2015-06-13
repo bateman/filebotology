@@ -46,8 +46,8 @@ print_help() {
 
 # redefine an echo function depending on verbose switch 
 print() {
-	level=$1
-        code=$GREEN # default is "NOTICE"
+	local level=$1
+        local code=$GREEN # default is "NOTICE"
         if [ "${level}" = 'ERROR' ]; then
 		code=$RED
 	elif [ "${level}" = 'INFO' ]; then
@@ -85,19 +85,27 @@ rename_subs_in_path() {
 	fi
 }
 
+# checks that at least mandatory opt args have been provided correctly
+check_args_consistency() {
+	if [ "${MEDIATYPE}" == "" ]; then
+		print "ERROR" "-t option argument is missing."
+		print_help
+	elif [ "${MEDIAPATH}" == "" ]; then
+		print "ERROR" "-p option argument is missing."
+	        print_help
+	fi
+}
+
 # parse args
 while getopts "t:p:l:r:vh" FLAG; do
 	case $FLAG in
 		t ) MEDIATYPE=$OPTARG
-			if [ "${MEDIATYPE}" != "tv" ] && [ "${MEDIATYPE}" != "movie" ]; then 
-				print "ERROR" "-t option either is missing or has wrong argument." #>&2
+			if [ "${MEDIATYPE}" != 'tv' ] && [ "${MEDIATYPE}" != 'movie' ]; then 
+				print "ERROR" "-t option has wrong argument." #>&2
 				print_help
 			fi;;
 		p ) MEDIAPATH=$OPTARG
-			if [ "${MEDIAPATH}" == "" ]; then
-				print "ERROR" "-p option argument is missing." #>&2
-				print_help
-			elif [ ! -d "${MEDIAPATH}" ]; then
+			if [ ! -d "${MEDIAPATH}" ]; then
 				print "ERROR" "Directory ${MEDIAPATH} does not exist."
 				exit 2
 			fi;;
@@ -124,6 +132,8 @@ if [ $VERBOSE = "on" ]; then
 else
 	exec 2>&1 1>>$LOG # redirects stderr to stdout, both to LOG file
 fi
+
+check_args_consistency $MEDIATYPE $MEDIAPATH
 get_missing_subs $MEDIATYPE $MEDIAPATH
 rename_subs_in_path $MEDIATYPE $MEDIAPATH
 ### end main ###
