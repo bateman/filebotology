@@ -17,6 +17,8 @@ This script relies on [Filebot cli] (http://www.filebot.net/cli.html) capabiliti
   5. Still via SSH, checkout the script in your NAS:
    * `$ cd /volume1/git/`
    * `$ git clone https://github.com/bateman/filebotology.git`
+   Then, make sure the script are executable on your system
+   * `$ chmod +x *.sh`
   6. Go to the Control Panel ► Task Scheduler (i.e., the DSM cron equivalent) and create one or two tasks for TV Shows and/or Movies, accordingly:
    * `$ /volume1/git/filebotology/filebotology.sh -t tv -p /volume1/video/tvshows/ >> /var/log/filebotology.log`
    * `$ /volume1/git/filebotology/filebotology.sh -t movies -p /volume1/video/movies/ >> /var/log/filebotology.log`
