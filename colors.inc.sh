@@ -9,10 +9,16 @@
 
 #Set colors as ENV VARS for console output 
 
-RED='\033[0;31m'	# mapped onto ERROR
-CYAN='\033[0;36m'	# mapped onto INFO
-GREEN='\033[0;32m'	# mapped onto NOTICE
-YELLOW='\033[0;33m'	# used in print_help() for params
-PURPLE='\033[0;35m'	# used in print_help() for params
-NC='\033[0m' 		# reset to No Color
+# mapped onto ERROR (bold)
+RED='\e[1;91m'
+# mapped onto INFO (bold)
+CYAN='\e[1;96m'
+# mapped onto NOTICE (bold)
+GREEN='\e[1;92m'
+# used in print_help() for params
+YELLOW='\e[93m'
+# used in print_help() for params
+PURPLE='\e[95m'
+# reset to No Color
+NC='\e[0m'
 
