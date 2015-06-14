@@ -3,7 +3,7 @@
 ##
 # Author: 	bateman
 # Date: 	Jan. 28, 2015
-# Rev:		Jun. 13, 2015
+# Rev:		Jun. 14, 2015
 # Ver:		1.2
 ## 
 
@@ -27,20 +27,20 @@ LOG="/var/log/filebotology.log"
 VERBOSE="off"
 
 # loads color env vars for stdout colors
-source ./colors.inc.sh
+source ./colorsformat.inc.sh
 
 
 # print help instructions
 print_help() {
-		printf "\nHelp documentation for ${CYAN}$SCRIPT ${NC}\n\n"
-		printf "The following command line options are recognized, -t and -p are mandatory.\n"
-		printf "\t ${YELLOW}-t ${PURPLE}type ${NC}\t -- Mandatory, sets the type of media to scan. Allowed values are 'tv' or 'movie'.\n"
-		printf "\t ${YELLOW}-p ${PURPLE}path ${NC}\t -- Mandatory, sets the path where to look for media.\n"
-		printf "\t ${YELLOW}-l ${PURPLE}lang ${NC}\t -- Sets the two-letter code for subs language (default arg is 'en').\n"
-		printf "\t ${YELLOW}-r ${PURPLE}lang ${NC}\t -- Renames subs replacing 3-letter code with 2-letter one (e.g, from 'eng' to 'en'). Must match -l arg.\n"
-		printf "\t ${YELLOW}-v ${NC}\t\t -- Enables verbose output on the console, disabled by default.\n"
-		printf "\t ${YELLOW}-h ${NC}\t\t -- Displays this help message. No further functions are performed.\n\n"
-		printf "Example: ${CYAN}$SCRIPT -t tv -p /volume1/video/tvshows ${NC}\n\n"
+		printf "\nHelp documentation for ${BOLD}$SCRIPT ${NC}\n\n"
+		printf "The following command line options are recognized, ${UNDER}-t and -p are mandatory${NC}.\n"
+		printf "\t ${BOLD}-t type ${NC}\t -- Mandatory, sets the type of media to scan. Allowed values are 'tv' or 'movie'.\n"
+		printf "\t ${BOLD}-p path ${NC}\t -- Mandatory, sets the path where to look for media.\n"
+		printf "\t ${BOLD}-l lang ${NC}\t -- Sets the two-letter code for subs language (default arg is 'en').\n"
+		printf "\t ${BOLD}-r lang ${NC}\t -- Renames subs replacing 3-letter code with 2-letter one (e.g, from 'eng' to 'en'). Must match -l arg.\n"
+		printf "\t ${BOLD}-v ${NC}\t\t -- Enables verbose output on the console, disabled by default.\n"
+		printf "\t ${BOLD}-h ${NC}\t\t -- Displays this help message. No further functions are performed.\n\n"
+		printf "Example: ${BOLD}$SCRIPT -t tv -p /volume1/video/tvshows ${NC}\n\n"
 		exit 1
 }
 
