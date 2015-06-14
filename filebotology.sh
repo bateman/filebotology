@@ -133,9 +133,9 @@ else
 	exec 2>&1 1>>$LOG # redirects stderr to stdout, both to LOG file
 fi
 
-check_args_consistency $MEDIATYPE $MEDIAPATH
-get_missing_subs $MEDIATYPE $MEDIAPATH
-rename_subs_in_path $MEDIATYPE $MEDIAPATH
+check_args_consistency
+get_missing_subs
+rename_subs_in_path
 ### end main ###
 
 exit 0
