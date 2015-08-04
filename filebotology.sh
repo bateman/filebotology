@@ -38,7 +38,7 @@ source ./colorsformat.inc.sh
 # print help instructions
 print_help() {
 		printf "\nHelp documentation for ${BOLD}$SCRIPT ${NC}\n\n"
-		printf "The following command line options are recognized, ${UNDER}-t and -p are mandatory${NC}.\n"
+		printf "The following command line options are recognized:\n"
 		printf "\t ${BOLD}-t type ${NC}\t -- ${UNDER}Mandatory${NC}, sets the type of media to scan. Allowed values are 'tv' or 'movie'.\n"
 		printf "\t ${BOLD}-p path ${NC}\t -- ${UNDER}Mandatory${NC}, sets the path where to look for media.\n"
 		printf "\t ${BOLD}-u username ${NC}\t -- ${UNDER}Mandatory${NC}, sets the OpenSubtitles.org username for authenticating.\n"
@@ -48,7 +48,7 @@ print_help() {
 		printf "\t ${BOLD}-v ${NC}\t\t -- Enables verbose output on the console, disabled by default.\n"
 		printf "\t ${BOLD}-e ${NC}\t\t -- Sets the recipient address for enabling the notification of errors by email.\n"
 		printf "\t ${BOLD}-h ${NC}\t\t -- Displays this help message. No further functions are performed.\n\n"
-		printf "Example: ${BOLD}$SCRIPT -t tv -p /volume1/video/tvshows ${NC}\n\n"
+		printf "Example: ${BOLD}$SCRIPT -u bateman -s secret -t tv -p /volume1/video/tvshows ${NC}\n\n"
 		exit 1
 }
 
