@@ -126,14 +126,14 @@ check_osdb_credentials() {
 	elif [ "$?" == 1 ]; then
 		print "ERROR" "401 Unauthorized: Please check your credentials, error code $?"
 		if [ "${EMAIL}" != "" ]; then
-			print "ERROR" "Sending error notification by email"
+			print "INFO" "Sending error notification by email"
 			send_email "401 Unauthorized: Please check your credentials, error code $?"
 		fi
 		exit 2
 	elif [ "$?" > 1 ]; then
 		print "ERROR" "Something went wrong, filebot error code $?"
  		if [ "${EMAIL}" != "" ]; then
- 			print "ERROR" "Sending error notification by email"
+ 			print "INFO" "Sending error notification by email"
 			send_email "Something went wrong, filebot error code $?"
 		fi
 		exit 2
