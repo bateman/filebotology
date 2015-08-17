@@ -186,7 +186,7 @@ shift $((OPTIND-1))  #This tells getopts to move on to the next argument.
 
 ### main instruction set to process files ###
 if [ $VERBOSE = "on" ]; then
-	exec 2>&1 # redirects stderr to to stdout
+	exec 2>&1 # redirects stderr to stdout
 else
 	exec 2>&1 1>>$LOG # redirects stderr to stdout, both to LOG file
 fi
