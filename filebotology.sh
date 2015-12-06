@@ -3,8 +3,8 @@
 ##
 # Author: 	bateman
 # Date: 	Jan. 28, 2015
-# Rev:		Aug. 4, 2015
-# Ver:		1.3beta
+# Rev:		Dec. 06, 2015
+# Ver:		1.3.1 beta
 ## 
 
 #Set Script Name variable
@@ -150,6 +150,11 @@ send_email() {
     echo -e "\n$body" >> $emailfile
     ssmtp $EMAIL < $emailfile
 }
+
+# check for at least one option to be present
+if [ -z "$1" ]; then
+	print_help
+fi
 
 # parse args
 while getopts "t:p:u:s:l:r:e:vh" FLAG; do
