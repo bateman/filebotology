@@ -11,6 +11,8 @@
 SCRIPT="filebotology.sh"
 
 # set default vars
+# script location
+INSTALL_PATH="/volume1/storage/script"
 # video location
 MEDIAPATH=""
 # video type, either 'tv' or 'movie'
@@ -31,6 +33,8 @@ PASSWORD=""
 # email address to send error notification to
 EMAIL=""
 
+# cd to install location
+cd "$INSTALL_PATH"
 # loads color env vars for stdout colors
 source ./colorsformat.inc.sh
 
