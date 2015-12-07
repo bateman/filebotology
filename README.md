@@ -4,7 +4,11 @@ This script relies on [Filebot cli] (http://www.filebot.net/cli.html) capabiliti
 
 ## Requirements
   * Filebot
+  * MediaInfo
+  * Chromaprint
   * Java SE Embedded 8 
+
+Please, note that, as of Filebot ver. 4.6, MediaInfo and Chromaprint must be installed as separate Synology community packages. Also, note that Chromaprint is currently in beta, so you have to enable the display of beta version in your package center.
 
 ## Installation
   1. First things first, go to Package Center ► Settings ► Trust Level: Anyone.
