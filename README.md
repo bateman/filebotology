@@ -15,7 +15,7 @@ Please, note that, as of Filebot ver. 4.6, MediaInfo and Chromaprint must be ins
   2. From the community packages (scroll down), install the following packages, all required by _Filebot_ to work properly:
    * MediaInfo
    * Chromaprint
-   * Unofficial Java Installer (will download and isntall for you Java SE Embedded 8)
+   * Unofficial Java Installer (will download and install for you the right version Java 8 SE for your NAS architecture)
   2. Also from the community packages, select and install _Git_ to ease the download of the script itself.
   3. Add Package Source also for _Filebot_; go to Package Center ► Settings ► Package Sources ► Add ► Name: FileBot and Location: [https://packages.filebot.net/syno/] (https://packages.filebot.net/syno/) ► OK. Now find and install it from Community packages list.
   4. Go to [www.opensubtitles.org] (www.opensubtitles.org), sign up and write down your credentials: they should either be hardcoded in the script, or passed as argument to the command line options, see next section (CLI execution) for more.
