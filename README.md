@@ -20,17 +20,17 @@ Please, note that, as of Filebot ver. 4.6, MediaInfo and Chromaprint must be ins
   3. Add Package Source also for _Filebot_; go to Package Center ► Settings ► Package Sources ► Add ► Name: FileBot and Location: [https://packages.filebot.net/syno/] (https://packages.filebot.net/syno/) ► OK. Now find and install it from Community packages list.
   4. Go to [www.opensubtitles.org] (www.opensubtitles.org), sign up and write down your credentials: they should either be hardcoded in the script, or passed as argument to the command line options, see next section (CLI execution) for more.
   5. Still via SSH, checkout the script in your NAS:
-   * `$ cd /volume1/git/`
+   * `$ cd /volume1/storage/script/`
    * `$ git clone https://github.com/bateman/filebotology.git`
    * Then, make sure the script are executable on your system:
    * `$ chmod +x *.sh`
   6. Go to the Control Panel ► Task Scheduler (i.e., the DSM cron equivalent) and create one or two tasks for TV Shows and/or Movies, accordingly:
-   * `$ /volume1/git/filebotology/filebotology.sh -u username -s secret -t tv -p /volume1/video/tvshows/`
-   * `$ /volume1/git/filebotology/filebotology.sh -u username -s secret -t movies -p /volume1/video/movies/`
+   * `$ /volume1/storage/script/filebotology/filebotology.sh -u username -s secret -t tv -p /volume1/video/tvshows/`
+   * `$ /volume1/storage/script//filebotology/filebotology.sh -u username -s secret -t movies -p /volume1/video/movies/`
    * Make them run once per day (no more often than that, or you risk to be banned); make sure to not run them at the same hour:minute, so their execution won't overlap; use root as task owner.
   7. Install the logrotate config for rotating the script log (_change the logrotate options as you wish_):
    * `$ cd /etc/logrotate.d`
-   * `$ ln -s /volume1/git/filebotology/fbt-logrotate filebotology`
+   * `$ ln -s /volume1/storage/script//filebotology/fbt-logrotate filebotology`
    * to check the status do a `$ cat /var/lib/logrotate.status | grep filebot`, it will return something like this: `"/var/log/filebotology.log" 2015-3-21-12:0:0`
   8. If you want to enable error notification via email, you should properly configure ssmtp on your NAS. To do so, edit these file as follows:
    * Edit file `/etc/ssmtp/ssmtp.conf` and paste the following snippet, changing text as needed:
