@@ -50,7 +50,7 @@ Please, note that, as of Filebot ver. 4.6, MediaInfo and Chromaprint must be ins
    `echo "ssmtp test" | ssmtp YOUR_GMAIL_USERNAME@gmail.com`
 
 ## CLI execution
-To run it from the command line, excute the script with the `-h` flag to print the following help menu. Please, note that the first two options `-t` and `-p` are **mandatory**.
+To run it from the command line, excute the script with the `-h` flag to print the following help menu. Please, note that the first four options `-t`, `-p`, `-u`, and `-s` are **mandatory**.
 ```
 -t type     Mandatory, sets the type of media to scan. Allowed values are 'tv' and 'movie'.
 -p path     Mandatory, sets the path where to look for media. No default value is set.
