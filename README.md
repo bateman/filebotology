@@ -26,7 +26,7 @@ Please, note that, as of Filebot ver. 4.6, MediaInfo and Chromaprint must be ins
    * `$ chmod +x *.sh`
   6. Go to the Control Panel ► Task Scheduler (i.e., the DSM cron equivalent) and create one or two tasks for TV Shows and/or Movies, accordingly:
    * `$ /volume1/storage/script/filebotology/filebotology.sh -u username -s secret -t tv -p /volume1/video/tvshows/`
-   * `$ /volume1/storage/script//filebotology/filebotology.sh -u username -s secret -t movies -p /volume1/video/movies/`
+   * `$ /volume1/storage/script/filebotology/filebotology.sh -u username -s secret -t movies -p /volume1/video/movies/`
    * Make them run once per day (no more often than that, or you risk to be banned); make sure to not run them at the same hour:minute, so their execution won't overlap; use root as task owner.
   7. Install the logrotate config for rotating the script log (_change the logrotate options as you wish_):
    * `$ cd /etc/logrotate.d`
