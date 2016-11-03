@@ -3,7 +3,7 @@
 ##
 # Author: 	bateman
 # Date: 	Jan. 28, 2015
-# Rev:		Dec. 06, 2015
+# Rev:		Nov. 03, 2016
 # Ver:		1.3.1 beta
 ## 
 
@@ -83,7 +83,7 @@ get_missing_subs() {
 		DB="--db TheMovieDB"
 	fi
 	
-	print "NOTICE" "Start finding missing subtitles in $LANG2 from $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S")."
+	print "NOTICE" "Starting to find missing subtitles in $LANG2 from $MEDIAPATH at $(date +"%Y-%m-%d %H-%M-%S")."
 	filebot -script fn:suball -get-missing-subtitles $DB --lang $LANG2 --format $FORMAT $MEDIAPATH $VERB_CMD | tee -a $LOG
 	if [ "$?" == 0 ]; then
 		print "NOTICE" "Done with finding missing subs at $(date +"%Y-%m-%d %H-%M-%S")."
