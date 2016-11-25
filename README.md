@@ -18,6 +18,8 @@ Please, note that, as of Filebot ver. 4.6, MediaInfo and Chromaprint must be ins
    * Unofficial Java Installer (will download and install for you the right version of Java 8 SE for your NAS architecture)
   2. Also from the community packages, select and install _Git_ to ease the download of the script itself.
   3. Add Package Source also for _Filebot_; go to Package Center ► Settings ► Package Sources ► Add ► Name: FileBot and Location: [https://packages.filebot.net/syno/] (https://packages.filebot.net/syno/) ► OK. Now find and install it from Community packages list.
+     After installing both Java and Filebot, connect to your DiskStation via SSH and execute the following to make sure that `filebot` binary will find the `java` binary  when executed from the script:
+   * `sudo ln -s -f /volume1/@appstore/Java8/j2sdk-image/bin/java /usr/local/bin/`
   4. Go to [www.opensubtitles.org] (www.opensubtitles.org), sign up and write down your credentials: they should either be hardcoded in the script, or passed as argument to the command line options, see next section (CLI execution) for more.
   5. Still via SSH, checkout the script in your NAS:
    * `$ cd /volume1/storage/script/`
